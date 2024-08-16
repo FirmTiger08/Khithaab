@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Details - Khithaab</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <header>
+        <img src="Images/FrontImg.jpg" alt="Khithaab Logo" class="logo-image">
+        <h1>Khithaab</h1>
+        <p>Buy and Sell Textbooks</p>
+    </header>
+
+    <main>
+        <section class="book-details">
+            <h2>Book Details</h2>
+            <!-- Display book details here -->
+            <div id="bookDetails">
+                <h3 id="bookTitle">Book Title</h3>
+                <p id="author">Author: </p>
+                <p id="price">Price: ₹ </p>
+                <p id="department">Department: </p>
+                <p id="condition">Condition: </p>
+                <p id="phoneNumber">Phone Number: </p>
+            </div>
+            <button onclick="window.location.href = 'buyandsell.html'">Back</button>
+        </section>
+        
+    </main>
+
+    <script type="module">
+        document.addEventListener("DOMContentLoaded", function () {
+            // Retrieve book details from the URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const bookTitle = decodeURIComponent(urlParams.get('bookTitle'));
+            const author = decodeURIComponent(urlParams.get('author'));
+            const price = decodeURIComponent(urlParams.get('price'));
+            const department = decodeURIComponent(urlParams.get('department'));
+            const condition = decodeURIComponent(urlParams.get('condition'));
+            const phoneNumber = decodeURIComponent(urlParams.get('phoneNumber'));
+
+            // Update the HTML with book details
+            document.getElementById('bookTitle').textContent = bookTitle || 'Book Title';
+            document.getElementById('author').textContent = `Author: ${author || 'Unknown Author'}`;
+            document.getElementById('price').textContent = `Price: ₹ ${price || 'Not specified'}`;
+            document.getElementById('department').textContent = `Department: ${department || 'Not specified'}`;
+            document.getElementById('condition').textContent = `Condition: ${condition || 'Not specified'}`;
+            document.getElementById('phoneNumber').textContent = `Phone Number: ${phoneNumber || 'Not specified'}`;
+                // Check if phoneNumber is a valid number before displaying
+    const phoneNumberElement = document.getElementById('phoneNumber');
+    if ((phoneNumber)) {
+        phoneNumberElement.textContent = `Phone Number: ${phoneNumber || 'Not specified'}`;
+    } else {
+        phoneNumberElement.textContent = 'Phone Number: Not specified';
+    }
+        });
+
+    </script>
+
+    <footer>
+        <p>&copy; 2024 Khithaab - Buy and Sell Textbooks</p>
+    </footer>
+</body>
+
+</html>

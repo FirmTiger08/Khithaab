@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khithaab - Sign Up</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <header>
+        <img src="Images/FrontImg.jpg" alt="Khithaab Logo" class="logo-image">
+        <h1>Khithaab</h1>
+        <p>Buy and Sell Textbooks</p>
+    </header>
+
+    <main>
+        <section class="signup-form">
+            <h2>Sign Up</h2>
+            <form id="signupForm">
+                <!-- Fields for user registration -->
+                <label for="newEmail">Email:</label>
+                <input type="email" id="newEmail" name="newEmail" required>
+
+                <label for="newPhoneNumber">Phone Number:</label>
+                <input type="tel" id="newPhoneNumber" name="newPhoneNumber" pattern="[0-9]{10}" required>
+
+                <label for="newPassword">Password:</label>
+                <input type="password" id="newPassword" name="newPassword" required>
+
+                <button type="submit">Sign Up</button>
+
+                <!-- Already have an account button -->
+            <p>Already have an account? <a href="login.html">Login</a></p>
+            </form>
+        </section>
+    </main>
+
+    <script type="module">
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDdHSZPDqVokH9nVtMx1ZqJVONdAqJcZHU",
+            authDomain: "khithaab.firebaseapp.com",
+            databaseURL: "https://khithaab-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "khithaab",
+            storageBucket: "khithaab.appspot.com",
+            messagingSenderId: "289912898746",
+            appId: "1:289912898746:web:7f8458541da191d9026e83",
+            measurementId: "G-4ZBTH8P9EM"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        const signupForm = document.getElementById('signupForm');
+
+        signupForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const newEmail = document.getElementById('newEmail').value;
+            const newPhoneNumber = document.getElementById('newPhoneNumber').value;
+            const newPassword = document.getElementById('newPassword').value;
+
+            try {
+                // Use Firebase Authentication to create a new user
+                await createUserWithEmailAndPassword(auth, newEmail, newPassword);
+                alert('Sign up successful! Redirecting to your login page.');
+                window.location.href = 'login.html';
+            } catch (error) {
+                alert('Error creating account. Please try again.');
+                console.error('Error creating account:', error);
+            }
+        });
+    </script>
+
+    <footer>
+        <p>&copy; 2024 Khithaab - Buy and Sell Textbooks</p>
+    </footer>
+
+</body>
+
+</html>

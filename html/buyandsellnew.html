@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Khithaab - Buy and Sell Textbooks</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <header>
+      <img src="Images/FrontImg.jpg" alt="Khithaab Logo" class="logo-image">
+      <h1>Khithaab</h1>
+      <p>Buy and Sell Textbooks</p>
+      <div id="logout-container">
+          <button onclick="logout()">Logout</button>
+    </header>
+
+    <main>
+      <section class="listing">
+        <h2>Available Textbooks</h2>
+        <!-- Existing book listings will be appended dynamically here -->
+      </section>
+
+      <section class="form">
+        <h2>Sell Your Textbook</h2>
+        <!-- Modified form with a dropdown for the department field -->
+        <form id="sellForm">
+          <label for="bookTitle">Book Title:</label>
+          <input type="text" id="bookTitle" name="bookTitle" required />
+
+          <label for="author">Author:</label>
+          <input type="text" id="author" name="author" required />
+
+          <label for="department">Department:</label>
+          <select id="department" name="department" required>
+            <option value="cse">CSE</option>
+            <option value="mee">MEE</option>
+            <option value="aie">AIE</option>
+            <option value="ece">ECE</option>
+            <!-- Add more options as needed -->
+          </select>
+
+          <label for="price">Price:</label>
+          <input type="number" id="price" name="price" required />
+
+          <label for="phoneNumber">Phone Number:</label>
+          <input
+            type="tel"
+            id="phoneNumber"
+            name="phoneNumber"
+            pattern="[0-9]{10}"
+            required
+          />
+
+          <button type="submit">List for Sale</button>
+        </form>
+      </section>
+    </main>
+
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
+      import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+      const firebaseConfig = {
+          apiKey: "AIzaSyDdHSZPDqVokH9nVtMx1ZqJVONdAqJcZHU",
+          authDomain: "khithaab.firebaseapp.com",
+          databaseURL: "https://khithaab-default-rtdb.asia-southeast1.firebasedatabase.app",
+          projectId: "khithaab",
+          storageBucket: "khithaab.appspot.com",
+          messagingSenderId: "289912898746",
+          appId: "1:289912898746:web:7f8458541da191d9026e83",
+          measurementId: "G-4ZBTH8P9EM"
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+      const db = getFirestore(app);
+
+      const sellForm = document.getElementById('sellForm');
+      const listingSection = document.querySelector('.listing');
+
+      // Fetch and display existing books when the page loads
+      window.addEventListener('load', async () => {
+          const booksSnapshot = await getDocs(collection(db, "books"));
+          booksSnapshot.forEach((doc) => {
+              const { bookTitle, author, price ,department} = doc.data();
+              displayBook(bookTitle, author, price,department);
+          });
+      });
+
+      sellForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    // Get input values
+    const bookTitle = document.getElementById('bookTitle').value;
+    const author = document.getElementById('author').value;
+    const price = document.getElementById('price').value;
+    const department = document.getElementById('department').value;
+    const phoneNumber = document.getElementById('phoneNumber').value;
+
+    try {
+        // Add data to Firestore
+        const docRef = await addDoc(collection(db, "books"), {
+            bookTitle,
+            author,
+            price,
+            department, // Include the department field
+            phoneNumber,
+        });
+
+        console.log("Document written with ID: ", docRef.id);
+
+        // Display the added data in the Available Textbooks section
+        displayBook(bookTitle, author, price, department);
+    } catch (e) {
+        console.error("Error adding document: ", e);
+    }
+});
+
+      function displayBook(bookTitle, author, price,department) {
+  // Create HTML elements for the book listing
+  const bookDiv = document.createElement('div');
+  bookDiv.classList.add('book');
+
+  const titleHeading = document.createElement('h3');
+  titleHeading.textContent = bookTitle;
+
+  const authorParagraph = document.createElement('p');
+  authorParagraph.textContent = `Author: ${author}`;
+
+  const priceParagraph = document.createElement('p');
+  priceParagraph.textContent = `Price: ₹ ${price}`;
+
+  const contactButton = document.createElement('button');
+  contactButton.textContent = 'Contact Seller';
+
+  const departmentParagraph = document.createElement('p');
+  departmentParagraph.textContent = `Department: ${department}`;
+
+  // Add event listener to the "Contact Seller" button
+  contactButton.addEventListener('click', () => {
+      // Redirect to another webpage (replace 'your_url_here' with the actual URL)
+      window.location.href = 'card.html';
+  });
+
+  // Append elements to the book listing
+  bookDiv.appendChild(titleHeading);
+  bookDiv.appendChild(authorParagraph);
+  bookDiv.appendChild(priceParagraph);
+  bookDiv.appendChild(contactButton);
+  bookDiv.appendChild(departmentParagraph);
+
+  // Append the book listing to the Available Textbooks section
+  listingSection.appendChild(bookDiv);
+}
+    </script>
+
+     <footer>
+      <p>&copy; 2024 Khithaab - Buy and Sell Textbooks</p>
+    </footer>
+</body>
+</html>

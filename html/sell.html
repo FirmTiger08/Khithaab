@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khithaab - Buy and Sell Textbooks</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>Khithaab</h1>
+        <p>Buy and Sell Textbooks</p>
+    </header>
+
+    <main>
+        <section class="listing">
+            <h2>Available Textbooks</h2>
+            <!-- Existing book listings will be appended dynamically here -->
+        </section>
+
+        <section class="form">
+            <h2>Sell Your Textbook</h2>
+            <!-- Add a form for users to list their textbooks for sale -->
+            <form id="sellForm">
+                <label for="bookTitle">Book Title:</label>
+                <input type="text" id="bookTitle" name="bookTitle" required>
+
+                <label for="author">Author:</label>
+                <input type="text" id="author" name="author" required>
+
+                <label for="price">Price:</label>
+                <input type="number" id="price" name="price" required>
+
+                <label for="phoneNumber">Phone Number:</label>
+                <input type="tel" id="phoneNumber" name="phoneNumber" pattern="[0-9]{10}" required>
+
+                <button type="submit">List for Sale</button>
+            </form>
+        </section>
+    </main>
+
+    <script type="module" src="sell.js"></script>
+
+    <footer>
+        <p>&copy; 2024 Khithaab - Buy and Sell Textbooks</p>
+    </footer>
+
+</body>
+
+</html>

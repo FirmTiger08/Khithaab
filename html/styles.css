@@ -1,0 +1,152 @@
+body {
+  font-family: "Bahnschrift", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header,
+main,
+footer {
+  text-align: center;
+  margin: 20px;
+}
+
+header {
+  background-color: #f0f0f0;
+  padding: 10px;
+}
+
+main {
+  display: flex;
+  justify-content: space-around;
+}
+
+section {
+  width: 45%;
+}
+
+.book,
+.form {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+form #department {
+  width: 100%;
+  height: 38px;
+}
+form #condition {
+  width: 100%;
+  height: 38px;
+}
+
+button {
+  background-color: #39c93d;
+  color: white;
+  padding: 20px;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #b72828;
+}
+footer {
+  position: fixed;
+  bottom: -30px; /* Adjust this value to move the footer down */
+  width: 100%;
+  background-color: #f0f0f0;
+  padding: 0px;
+  text-align: center;
+}
+
+section.home-buttons button {
+  font-family: "Bahnschrift", sans-serif;
+  padding: 15px;
+  font-size: 15px;
+  font-weight: bold;
+}
+header h1 {
+  font-family: "Samarkan", sans-serif;
+  padding: 20px;
+  font-size: 60px;
+}
+main img {
+  display: block;
+  margin: 10 auto; /* Center horizontally */
+  opacity: 0.4;
+  width: 50%;
+  height: auto;
+}
+/* Styles for login form */
+section.login-form input {
+  width: 100%; /* Adjust the width as needed */
+  padding: 10px;
+  margin: 5px 0;
+}
+
+/* Styles for signup form */
+section.signup-form input {
+  width: 100%; /* Adjust the width as needed */
+  padding: 10px;
+  margin: 5px 0;
+}
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 5px;
+}
+
+input {
+  width: 100%; /* Set the width as per your requirement */
+  padding: 8px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+}
+header {
+  position: relative;
+}
+
+#logout-container {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+body {
+  font-family: "Bahnschrift", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #f0f0f0;
+  padding: 10px;
+}
+
+.header-content {
+  text-align: center;
+}
+
+.logo-image {
+  position: absolute;
+  bottom: 10%; /* Adjust the top position */
+  left: 25%; /* Adjust the left position */
+  max-width: 200px; /* Adjust the maximum width as needed */
+  margin-bottom: 10px;
+}
